@@ -1,0 +1,22 @@
+/*===== contenedor main*/
+
+/*textarea*/
+.container-form__textarea {
+    height: 375px;
+}
+
+/*===== contenedor main*/
+
+/*botones*/
+.container-form__buttons {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.container-form__buttons input {
+    width: 48%;
+}
+
+.container-form__buttons input:last-child {
+    margin-top: 0;
+}

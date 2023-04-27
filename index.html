@@ -6,10 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encriptador de Texto</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/tablet.css" media="(min-width: 768px)">
+    <link rel="stylesheet" href="./css/desketop.css" media="(min-width: 1250px)">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     
+    <div class="container">
+        <header class="container-header">
+            <div class="container-header__logo">
+                <img src="./img/Logo.svg" alt="logo">
+            </div>
+        </header>
+
+        <main>
+            <form class="container-form">
+                <div class="container-form__textarea">
+                    <textarea name="" id=""  rows="9" placeholder="Ingrese el texto aqui"></textarea>
+                    <img src="./img/exclamation.svg" alt="icono-cerrar">
+                </div>
+
+                <div class="container-form__alert">
+                    <img src="./img/exclamation.svg" alt="">
+                    <p>Solo letras minúsculas y sin acentos</p>
+                </div>
+
+                <div class="container-form__buttons">
+                    <input type="submit" value="Encriptar" id="encriptar">
+                    <input type="submit" value="Desencriptar" id="desencriptar">
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <aside>
+        <section class="container-aside">
+            <div></div>
+            <h3>Ningún mensaje fue encontrado</h3>
+            <p>Ingrese el texto que deseas encriptar o desencriptar.</p>
+        </section>
+    </aside>
+
     <script src="main.js"></script>
 </body>
 </html>
