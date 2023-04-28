@@ -7,6 +7,12 @@
 
 .container-form__textarea textarea {
     height: 372px;
+    width: 96%;
+    padding-left: 20px;
+}
+
+.container__icons {
+    width: 4%;
 }
 
 /*===== contenedor main*/
