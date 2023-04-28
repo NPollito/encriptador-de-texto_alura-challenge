@@ -21,14 +21,17 @@
 
         <main>
             <form class="container-form">
-                <div class="container-form__textarea">
-                    <textarea name="" id=""  rows="9" placeholder="Ingrese el texto aqui"></textarea>
-                    <img src="./img/exclamation.svg" alt="icono-cerrar">
+                <div class="container-form__textarea form_textarea">
+                    <textarea name="" id="write-data"  rows="8" placeholder="Ingrese el texto aqui"></textarea>
+                    <div class="container__icons">
+                        <img src="./img/excellent.png" alt="check" id="excellent">
+                        <img src="./img/mistake.png" alt="mistake" id="mistake">
+                    </div>
                 </div>
 
                 <div class="container-form__alert">
                     <img src="./img/exclamation.svg" alt="">
-                    <p>Solo letras minúsculas y sin acentos</p>
+                    <p id="message">Solo letras minúsculas y sin acentos</p>
                 </div>
 
                 <div class="container-form__buttons">

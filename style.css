@@ -39,14 +39,17 @@ html {
 
 /*textarea*/
 .container-form__textarea {
+    position: relative;
     width: 90%;
     height: 255px;
     margin: 65px auto 0;
+
+    display: flex;
 }
 
 .container-form__textarea textarea {
     padding: 10px 5px;
-    width: 90%;
+    width: 94%;
     font-size: 2.2rem;
     font-weight: 400;
     color: var(--primary-color);
@@ -55,6 +58,13 @@ html {
     resize: none;
 }
 textarea::placeholder { color: var(--primary-color); }
+
+.container__icons {
+    position: absolute;
+    top: 12px;
+    right: 0;
+    width: 5%;
+}
 
 .container-form__textarea img {
     display: none;

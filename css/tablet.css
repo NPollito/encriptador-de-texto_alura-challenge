@@ -5,9 +5,14 @@
     height: 375px;
 }
 
+.container-form__textarea textarea {
+    height: 372px;
+}
+
 /*===== contenedor main*/
 
 /*botones*/
+
 .container-form__buttons {
     flex-direction: row;
     justify-content: space-between;
