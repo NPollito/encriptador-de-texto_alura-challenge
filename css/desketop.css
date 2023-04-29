@@ -23,11 +23,36 @@ body {
 
 .container-aside {
     margin: 0 auto;
+}
+
+.container-aside__message {
+    margin: 0 auto;
     height: 95vh;
 }
 
-.container-aside div{
+.container-aside__message div {
     width: 336px;
     height: 304px;
     background-image: url('../img/Muñeco.svg');
+}
+
+/*agregando con js*/
+
+.container-aside__button {
+    padding-top: 40px;
+    width: 100%;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.message {
+    width: 408px;
+    height: auto;
+}
+
+.copy {
+    width: 70%;
 }

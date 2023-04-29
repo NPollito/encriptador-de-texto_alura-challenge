@@ -31,3 +31,12 @@
 .container-form__buttons input:last-child {
     margin-top: 0;
 }
+
+
+/*===== contenedor aside*/
+
+/*agregando con js*/
+
+.copy {
+    width: 30%;
+}
