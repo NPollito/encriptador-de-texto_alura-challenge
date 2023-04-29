@@ -28,12 +28,7 @@ function alertMensaje() {
         document.querySelector('#message').style.color = '#0a3871'
         document.querySelector('#mistake').style = 'display: none'
         
-        if( inputMessage.value == "" ) {
-
-            document.querySelector('#excellent').style = 'display: none'
-            document.querySelector('#message')
-            .textContent = "Solo letras minúsculas y sin acentos"
-        }
+        inputEmpty()    //quitar el check de excellent
         
     } else {
         
@@ -43,6 +38,16 @@ function alertMensaje() {
         document.querySelector('#excellent').style = 'display: none'
     }
 };
+
+function inputEmpty() {
+
+    if( inputMessage.value == "" ) {
+
+        document.querySelector('#excellent').style = 'display: none'
+        document.querySelector('#message')
+        .textContent = "Solo letras minúsculas y sin acentos"
+    }
+}
 
 function encryptButton(e) {
 
@@ -54,7 +59,7 @@ function encryptButton(e) {
     if ( inputMessage.value === "" || !regex.exec(inputMessage.value)) {
         
         let inputAlert = document.querySelector('#message')
-        inputAlert.textContent = "Escribe Solo texto"
+        inputAlert.textContent = "Escribe solo texto para poder encriptar el mensaje"
         inputAlert.style.color = '#ff0000'
 
         return inputAlert
@@ -91,6 +96,8 @@ function encryptButton(e) {
     addCopyButton(encriptedMessage)
 
     inputMessage.value = ""
+
+    inputEmpty()
     
 };
 
@@ -133,6 +140,15 @@ function decryptButton(e) {
     
     let encryptedMessage = inputMessage.value
 
+    if ( inputMessage.value === "" || !regex.exec(inputMessage.value)) {
+        
+        let inputAlert = document.querySelector('#message')
+        inputAlert.textContent = "No hay mensaje o no cumple con la referencia"
+        inputAlert.style.color = '#ff0000'
+
+        return inputAlert
+    }
+
     encryptedMessage = encryptedMessage
     .replaceAll("enter", 'e')
     .replaceAll("imes", 'i')
@@ -143,4 +159,6 @@ function decryptButton(e) {
     addCopyButton(encryptedMessage)
 
     inputMessage.value = ""
+
+    inputEmpty()
 };

@@ -160,9 +160,11 @@ textarea::placeholder { color: var(--primary-color); }
     padding: 20px 2px 20px;
     text-align: center;
     height: auto;
+    overflow: hidden;
 }
 
 .message{
+    padding: 0 10px;
     font-size: 2rem;
     color: #343A40;
 }
