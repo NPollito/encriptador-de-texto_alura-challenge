@@ -1,17 +1,19 @@
 //variables
-const writeData = document.querySelector('#write-data');
+const inputMessage = document.querySelector('#write-data');
 const regex = /^[a-z ]*$/;  //expresión re. solo acepta letras no mayúsculas
 
 const encrypt = document.querySelector('#encriptar')
 const containerAside = document.querySelector('.container-aside')
+const decrypt = document.querySelector('#desencriptar')
 
-eventos()
+pageEvents()
 
-function eventos() {
+function pageEvents() {
 
-    writeData.addEventListener('keyup', alertMensaje)
+    inputMessage.addEventListener('keyup', alertMensaje)
     encrypt.addEventListener('click', encryptButton)
     containerAside.addEventListener('click', searchButtonCopy)
+    decrypt.addEventListener('click', decryptButton)
 };
 
 
@@ -19,14 +21,14 @@ function eventos() {
 
 function alertMensaje() {
 
-    if( regex.exec(writeData.value) ) {
+    if( regex.exec(inputMessage.value) ) {
 
         document.querySelector('.form_textarea').classList.remove('border-red')
         document.querySelector('#excellent').style = 'display: block'
         document.querySelector('#message').style.color = '#0a3871'
         document.querySelector('#mistake').style = 'display: none'
         
-        if( writeData.value == "" ) {
+        if( inputMessage.value == "" ) {
 
             document.querySelector('#excellent').style = 'display: none'
             document.querySelector('#message')
@@ -49,7 +51,7 @@ function encryptButton(e) {
     e.preventDefault()
 
     //Si no cumple con el formulario
-    if ( writeData.value === "" || !regex.exec(writeData.value)) {
+    if ( inputMessage.value === "" || !regex.exec(inputMessage.value)) {
         
         let inputAlert = document.querySelector('#message')
         inputAlert.textContent = "Escribe Solo texto"
@@ -60,9 +62,9 @@ function encryptButton(e) {
 
 
     //encriptar textos
-    for ( let i = 0; i < writeData.value.length; i++ ) {
+    for ( let i = 0; i < inputMessage.value.length; i++ ) {
 
-        switch ( writeData.value[i] ) {
+        switch ( inputMessage.value[i] ) {
 
             case 'e':
                 encriptedMessage += "enter"
@@ -81,14 +83,14 @@ function encryptButton(e) {
                 break;
         
             default:
-                encriptedMessage += writeData.value[i]
+                encriptedMessage += inputMessage.value[i]
         }
     }
 
     //Mostrar el mensaje encriptado en la página
     addCopyButton(encriptedMessage)
 
-    writeData.value = ""
+    inputMessage.value = ""
     
 };
 
@@ -106,11 +108,10 @@ function addCopyButton(text) {
     DIV.classList.add('container-aside__button')
 
     containerAside.appendChild(DIV)
-}
+};
 
 function searchButtonCopy(e) {
     
-
     if( e.target.classList.contains("copy") ) {
         
         let messageEncripted = document.querySelector('.message').textContent
@@ -124,4 +125,22 @@ function searchButtonCopy(e) {
         document.execCommand('copy')
         textArea.remove()
     }
-}
+};
+
+function decryptButton(e) {
+    
+    e.preventDefault()
+    
+    let encryptedMessage = inputMessage.value
+
+    encryptedMessage = encryptedMessage
+    .replaceAll("enter", 'e')
+    .replaceAll("imes", 'i')
+    .replaceAll("ai", 'a')
+    .replaceAll("ober", 'o')
+    .replaceAll("ufat", 'u')
+
+    addCopyButton(encryptedMessage)
+
+    inputMessage.value = ""
+};
