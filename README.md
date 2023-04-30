@@ -34,6 +34,6 @@
 
 ## Reto Finalizado
 
-> **Click [aquí](http://www "hola") para ver el reto terminado.**
+> **Click [aquí](https://npollito.github.io/encriptador-de-texto_alura-challenge/ "hola") para ver el reto terminado.**
 
 [![imagen](addres "pc")](./img/reto.webp "imagen")
