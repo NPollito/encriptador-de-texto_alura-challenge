@@ -1,4 +1,4 @@
-#Encriptador de texto - Alura Challenges ONE
+# Encriptador de texto - Alura Challenges ONE
 
 ### ¡Bienvenidas y bienvenidos a nuestro primer desafío!
 
@@ -11,7 +11,7 @@
 - La letra **"o"** es convertida para **"ober"**
 - La letra **"u"** es convertida para **"ufat"**
 
-###Requisitos:
+### Requisitos:
 
 - Debe funcionar solo con letras minúsculas
 
@@ -19,7 +19,7 @@
 
 - Debe ser posible convertir una palabra para la versión encriptada también devolver una palabra encriptada para su versión original.
 
-      *Por ejemplo:*
+      Por ejemplo:
 
   "gato" => "gaitober"
   "gaitober" => "gato"
@@ -28,7 +28,7 @@
 
 - El resultado debe ser mostrado en la pantalla.
 
-###Extras:
+### Extras:
 
 - Un botón que copie el texto encriptado/desencriptado para la sección de transferencia, o sea que tenga la misma funcionalidad del ctrl+C o de la opción "copiar" del menú de las aplicaciones.
 
@@ -36,4 +36,4 @@
 
 > **Click [aquí](https://npollito.github.io/encriptador-de-texto_alura-challenge/ "hola") para ver el reto terminado.**
 
-[![imagen](addres "pc")](./img/reto.webp "imagen")
+![reto](https://user-images.githubusercontent.com/80648862/235330142-782ba312-c303-46eb-a37c-c02987432fda.png)
