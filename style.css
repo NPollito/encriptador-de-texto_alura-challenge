@@ -118,6 +118,9 @@ textarea::placeholder { color: var(--primary-color); }
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
 }
+.container-form__buttons input:hover {
+    font-size: 1.8rem;
+}
 
 
 /*===== contenedor aside*/
@@ -157,16 +160,18 @@ textarea::placeholder { color: var(--primary-color); }
 
 .container-aside__button {
     width: 95%;
-    padding: 20px 2px 20px;
+    margin: 0 auto;
+    padding: 20px 0;
     text-align: center;
     height: auto;
-    overflow: hidden;
 }
 
 .message{
-    padding: 0 10px;
+    width: 95%;
+    margin: 0 auto;
     font-size: 2rem;
     color: #343A40;
+    word-wrap: break-word;
 }
 
 .copy {
