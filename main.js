@@ -21,7 +21,7 @@ function pageEvents() {
 
 function alertMensaje() {
 
-    if( regex.exec(inputMessage.value) ) {
+    if( regex.exec(inputMessage.value.trim()) ) {
 
         document.querySelector('.form_textarea').classList.remove('border-red')
         document.querySelector('#excellent').style = 'display: block'
@@ -41,7 +41,7 @@ function alertMensaje() {
 
 function inputEmpty() {
 
-    if( inputMessage.value == "" ) {
+    if( inputMessage.value.trim() == "" ) {
 
         document.querySelector('#excellent').style = 'display: none'
         document.querySelector('#message')
@@ -56,7 +56,7 @@ function encryptButton(e) {
     e.preventDefault()
 
     //Si no cumple con el formulario
-    if ( inputMessage.value === "" || !regex.exec(inputMessage.value)) {
+    if ( inputMessage.value.trim() === "" || !regex.exec(inputMessage.value.trim())) {
         
         let inputAlert = document.querySelector('#message')
         inputAlert.textContent = "Escribe solo texto para poder encriptar el mensaje"
@@ -121,7 +121,7 @@ function searchButtonCopy(e) {
     
     if( e.target.classList.contains("copy") ) {
         
-        let messageEncripted = document.querySelector('.message').textContent
+        let messageEncripted = document.querySelector('.message').textContent.trim()
         document.querySelector('.copy').textContent = "Copiado"
 
         let textArea = document.createElement('textarea')
@@ -140,7 +140,7 @@ function decryptButton(e) {
     
     let encryptedMessage = inputMessage.value
 
-    if ( inputMessage.value === "" || !regex.exec(inputMessage.value)) {
+    if ( inputMessage.value.trim() === "" || !regex.exec(inputMessage.value.trim())) {
         
         let inputAlert = document.querySelector('#message')
         inputAlert.textContent = "No hay mensaje o no cumple con la referencia"
@@ -158,7 +158,7 @@ function decryptButton(e) {
 
     addCopyButton(encryptedMessage)
 
-    inputMessage.value = ""
+    inputMessage.value.trim() = ""
 
     inputEmpty()
 };
