@@ -1,6 +1,6 @@
 //variables
 const inputMessage = document.querySelector('#write-data');
-const regex = /^[a-z ]*$/;  //expresión re. solo acepta letras no mayúsculas
+const regex = /^[a-zñ ]*$/;  //expresión re. solo acepta letras no mayúsculas
 
 const encrypt = document.querySelector('#encriptar')
 const containerAside = document.querySelector('.container-aside')
