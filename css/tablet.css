@@ -1,42 +1,32 @@
-/*===== contenedor main*/
-
-/*textarea*/
-.container-form__textarea {
-    height: 375px;
+/*===== nav tabs*/
+.tabs__ul {
+  display: flex;
+  justify-content: space-evenly;
 }
 
-.container-form__textarea textarea {
-    height: 372px;
-    width: 96%;
-    padding-left: 20px;
-}
-
-.container__icons {
-    width: 4%;
+.tabs__list {
+  flex-grow: 1;
 }
 
 /*===== contenedor main*/
-
-/*botones*/
-
-.container-form__buttons {
-    flex-direction: row;
-    justify-content: space-between;
+.main__container {
+  margin-top: 20px;
 }
 
-.container-form__buttons input {
-    width: 48%;
+.form__textarea {
+  height: 300px;
 }
 
-.container-form__buttons input:last-child {
-    margin-top: 0;
+/* botones */
+.form__buttons {
+  display: flex;
+  justify-content: space-evenly;
 }
 
+.form__buttons input {
+  width: 40%;
+}
 
-/*===== contenedor aside*/
-
-/*agregando con js*/
-
-.copy {
-    width: 30%;
+.form__buttons input:last-child {
+  margin-top: 0;
 }

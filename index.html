@@ -1,57 +1,122 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Author: nilton.p.v Encriptador de texto
+    challengue alura-latam ONE"
+    />
     <title>Encriptador de Texto</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="./css/tablet.css" media="(min-width: 768px)">
-    <link rel="stylesheet" href="./css/desketop.css" media="(min-width: 1250px)">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    
-    <div class="container">
-        <header class="container-header">
-            <div class="container-header__logo">
-                <img src="./img/Logo.svg" alt="logo">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./css/tablet.css" media="(min-width: 500px)" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <section class="header__container container">
+        <img src="./img/Logo.svg" alt="logo" class="header__image" />
+      </section>
+    </header>
+
+    <nav class="tabs" id="tabs">
+      <ul class="tabs__ul container">
+        <li class="tabs__list tabs__list--active">Encriptador</li>
+        <li class="tabs__list">Historial</li>
+        <li class="tabs__list">Creado por</li>
+      </ul>
+    </nav>
+
+    <main class="main">
+      <section class="main__container container">
+        <section class="panels">
+          <form class="form panels__items panels__items--active" id="encrypter">
+            <div class="form__container-textarea">
+              <textarea
+                id="write-data"
+                class="form__textarea"
+                placeholder="Ingrese el texto aqui"
+              ></textarea>
+              <span id="delete" class="form__delete" title="Borrar Todo"
+                >X</span
+              >
             </div>
-        </header>
 
-        <main>
-            <form class="container-form">
-                <div class="container-form__textarea form_textarea">
-                    <textarea name="" id="write-data"  rows="8" placeholder="Ingrese el texto aqui"></textarea>
-                    <div class="container__icons">
-                        <img src="./img/excellent.png" alt="check" id="excellent">
-                        <img src="./img/mistake.png" alt="mistake" id="mistake">
-                    </div>
-                </div>
-
-                <div class="container-form__alert">
-                    <img src="./img/exclamation.svg" alt="">
-                    <p id="message">Solo letras minúsculas y sin acentos</p>
-                </div>
-
-                <div class="container-form__buttons">
-                    <input type="submit" value="Encriptar" id="encriptar">
-                    <input type="submit" value="Desencriptar" id="desencriptar">
-                </div>
-            </form>
-        </main>
-    </div>
-
-    <aside>
-        <section class="container-aside">
-            <div class="container-aside__message">
-                <div class="img"></div>
-                <h3 class="aside__title">Ningún mensaje fue encontrado</h3>
-                <p class="aside__paragraph">Ingrese el texto que deseas encriptar o desencriptar.</p>
+            <div class="form__alert">
+              <img src="./img/exclamation.svg" alt="alert" class="form__icon" />
+              <p id="alert__message" class="form__message">
+                Solo letras minúsculas y sin acentos
+              </p>
             </div>
+
+            <div class="form__buttons">
+              <input
+                type="submit"
+                value="Encriptar"
+                id="btn_encriptar"
+                disabled
+              />
+              <input
+                type="submit"
+                value="Desencriptar"
+                id="btn_desencriptar"
+                disabled
+              />
+            </div>
+          </form>
+
+          <article class="scroll panels__items">
+            <table class="table">
+              <thead class="table__head">
+                <tr>
+                  <th>Id</th>
+                  <th>Mensajes Encriptados</th>
+                  <th>Copiar</th>
+                  <th>Borrar</th>
+                </tr>
+              </thead>
+              <tbody class="table__body">
+                <tr>
+                  <td>1</td>
+                  <td>el mensaje ya esta encriptado como para que</td>
+                  <td><i class="fa-regular fa-clone" title="Copiar"></i></td>
+                  <td><i class="fa-solid fa-trash" title="Borrar"></i></td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="panels__items">
+            <div class="credits">
+              <h2 class="credits__title">
+                Esta página fue
+                <br />
+                diseñado por
+              </h2>
+              <i class="fa-brands fa-github credits__github"></i>
+              <p class="credits__name">
+                <a href="https://github.com/NPollito" target="_blank"
+                  >Nilton pv</a
+                >
+              </p>
+            </div>
+          </article>
         </section>
-    </aside>
-
-    <script src="main.js"></script>
-</body>
+      </section>
+    </main>
+    <script src="./tabs.js"></script>
+    <!-- <script src="main.js"></script> -->
+  </body>
 </html>
