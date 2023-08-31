@@ -1,164 +1,239 @@
 //variables
 const inputMessage = document.querySelector('#write-data');
-const regex = /^[a-zñ ]*$/;  //expresión re. solo acepta letras no mayúsculas
+const regex = /^[a-zñ ]*$/;  //expresión regular. solo acepta letras no mayúsculas
+const btnEncrypt = document.querySelector('#btn_encriptar');
+const btnDecrypt = document.querySelector('#btn_desencriptar')
+const btnDelete = document.querySelector('#delete')
 
-const encrypt = document.querySelector('#encriptar')
-const containerAside = document.querySelector('.container-aside')
-const decrypt = document.querySelector('#desencriptar')
-
-pageEvents()
-
-function pageEvents() {
-
-    inputMessage.addEventListener('keyup', alertMensaje)
-    encrypt.addEventListener('click', encryptButton)
-    containerAside.addEventListener('click', searchButtonCopy)
-    decrypt.addEventListener('click', decryptButton)
-};
-
+//evento
+inputMessage.addEventListener('input', validate)
 
 //funciones
+function validate(e) {
 
-function alertMensaje() {
+    if( e.target.value.trim() === "" ) {
 
-    if( regex.exec(inputMessage.value.trim()) ) {
-
-        document.querySelector('.form_textarea').classList.remove('border-red')
-        document.querySelector('#excellent').style = 'display: block'
-        document.querySelector('#message').style.color = '#0a3871'
-        document.querySelector('#mistake').style = 'display: none'
-        
-        inputEmpty()    //quitar el check de excellent
-        
-    } else {
-        
-        document.querySelector('.form_textarea').classList.add('border-red')
-        document.querySelector('#mistake').style = 'display: block'
-        document.querySelector('#message').style.color = '#ff0000'
-        document.querySelector('#excellent').style = 'display: none'
+        showAlert("Ingrese el mensaje", true)
+        btnDelete.style.display = 'none'
+        return
     }
-};
 
-function inputEmpty() {
+    if ( !validateMessage(e.target.value) ){
 
-    if( inputMessage.value.trim() == "" ) {
-
-        document.querySelector('#excellent').style = 'display: none'
-        document.querySelector('#message')
-        .textContent = "Solo letras minúsculas y sin acentos"
+        showAlert("Solo aceptamos letras de la A hasta la Z", true)
+        return
     }
+
+    showAlert("Solo letras minúsculas y sin acentos", false)
+    showDeleteButton()
+
 }
 
-function encryptButton(e) {
+function showAlert(message, validate) {
 
-    let encriptedMessage = ""
-
-    e.preventDefault()
-
-    //Si no cumple con el formulario
-    if ( inputMessage.value.trim() === "" || !regex.exec(inputMessage.value.trim())) {
+    if ( validate ) {
         
-        let inputAlert = document.querySelector('#message')
-        inputAlert.textContent = "Escribe solo texto para poder encriptar el mensaje"
-        inputAlert.style.color = '#ff0000'
+        // actualizar el textarea
+        document.querySelector('.form__icon').style.color = '#ca6565'
+        document.querySelector('.form__message').style.color = '#ca6565'
+        inputMessage.style.borderColor = '#ca6565'
+        document.querySelector('.form__message').innerText = message
 
-        return inputAlert
+        // actualizar estado de los botones
+        btnEncrypt.style.opacity = '0.5'
+        btnEncrypt.disabled = true
+        btnDecrypt.style.opacity = '0.5'
+        btnDecrypt.disabled = true
+    } else {
+
+        document.querySelector('.form__icon').style.color = '#ffffff'
+        document.querySelector('.form__message').style.color = '#ffffff'
+        inputMessage.style.borderColor = '#ffffff'
+        document.querySelector('.form__message').innerText = message
+
+        btnEncrypt.style.opacity = '1'
+        btnEncrypt.disabled = false
+        btnDecrypt.style.opacity = '1'
+        btnDecrypt.disabled = false
     }
+};
 
+function showDeleteButton() {
+    
+    btnDelete.style.display = 'block'
 
-    //encriptar textos
-    for ( let i = 0; i < inputMessage.value.length; i++ ) {
+    btnDelete.addEventListener('click', () => {
 
-        switch ( inputMessage.value[i] ) {
+        if ( inputMessage.value == "" ) {
 
-            case 'e':
-                encriptedMessage += "enter"
-                break;
-            case 'i':
-                encriptedMessage += "imes"
-                break;
-            case 'a':
-                encriptedMessage += "ai"
-                break;
-            case 'o':
-                encriptedMessage += "ober"
-                break;
-            case 'u':
-                encriptedMessage += "ufat"
-                break;
-        
-            default:
-                encriptedMessage += inputMessage.value[i]
+            btnDelete.style.display = 'none'
+
+            showAlert("Solo letras minúsculas y sin acentos", true)
         }
-    }
-
-    //Mostrar el mensaje encriptado en la página
-    addCopyButton(encriptedMessage)
-
-    inputMessage.value = ""
-
-    inputEmpty()
-    
-};
-
-function addCopyButton(text) {
-
-    //resetear html
-    containerAside.innerHTML = ""
-
-    //crear boton copiar
-    const DIV = document.createElement('div')
-    DIV.innerHTML = `
-        <p class="message">${text}</p>
-        <button class="copy">Copiar</button>
-    `
-    DIV.classList.add('container-aside__button')
-
-    containerAside.appendChild(DIV)
-};
-
-function searchButtonCopy(e) {
-    
-    if( e.target.classList.contains("copy") ) {
         
-        let messageEncripted = document.querySelector('.message').textContent.trim()
-        document.querySelector('.copy').textContent = "Copiado"
-
-        let textArea = document.createElement('textarea')
-        document.body.appendChild(textArea)
-        textArea.textContent = messageEncripted
-
-        textArea.select()
-        document.execCommand('copy')
-        textArea.remove()
-    }
+        inputMessage.value = ""
+    })
 };
 
-function decryptButton(e) {
-    
-    e.preventDefault()
-    
-    let encryptedMessage = inputMessage.value
+function validateMessage(message) {
 
-    if ( inputMessage.value.trim() === "" || !regex.exec(inputMessage.value.trim())) {
+    const result = regex.test(message)
+    return result
+};
+
+// pageEvents()
+
+// function pageEvents() {
+
+//     inputMessage.addEventListener('keyup', alertMensaje)
+//     encrypt.addEventListener('click', encryptButton)
+//     containerAside.addEventListener('click', searchButtonCopy)
+//     decrypt.addEventListener('click', decryptButton)
+// };
+
+
+// //funciones
+
+// function alertMensaje() {
+
+//     if( regex.exec(inputMessage.value.trim()) ) {
+
+//         document.querySelector('.form_textarea').classList.remove('border-red')
+//         document.querySelector('#excellent').style = 'display: block'
+//         document.querySelector('#message').style.color = '#0a3871'
+//         document.querySelector('#mistake').style = 'display: none'
         
-        let inputAlert = document.querySelector('#message')
-        inputAlert.textContent = "No hay mensaje o no cumple con la referencia"
-        inputAlert.style.color = '#ff0000'
+//         inputEmpty()    //quitar el check de excellent
+        
+//     } else {
+        
+//         document.querySelector('.form_textarea').classList.add('border-red')
+//         document.querySelector('#mistake').style = 'display: block'
+//         document.querySelector('#message').style.color = '#ff0000'
+//         document.querySelector('#excellent').style = 'display: none'
+//     }
+// };
 
-        return inputAlert
-    }
+// function inputEmpty() {
 
-    encryptedMessage = encryptedMessage
-    .replaceAll("enter", 'e')
-    .replaceAll("imes", 'i')
-    .replaceAll("ai", 'a')
-    .replaceAll("ober", 'o')
-    .replaceAll("ufat", 'u')
+//     if( inputMessage.value.trim() == "" ) {
 
-    addCopyButton(encryptedMessage)
+//         document.querySelector('#excellent').style = 'display: none'
+//         document.querySelector('#message')
+//         .textContent = "Solo letras minúsculas y sin acentos"
+//     }
+// }
 
-    inputMessage.value.trim() = ""
+// function encryptButton(e) {
 
-    inputEmpty()
-};
+//     let encriptedMessage = ""
+
+//     e.preventDefault()
+
+//     //Si no cumple con el formulario
+//     if ( inputMessage.value.trim() === "" || !regex.exec(inputMessage.value.trim())) {
+        
+//         let inputAlert = document.querySelector('#message')
+//         inputAlert.textContent = "Escribe solo texto para poder encriptar el mensaje"
+//         inputAlert.style.color = '#ff0000'
+
+//         return inputAlert
+//     }
+
+
+//     //encriptar textos
+//     for ( let i = 0; i < inputMessage.value.length; i++ ) {
+
+//         switch ( inputMessage.value[i] ) {
+
+//             case 'e':
+//                 encriptedMessage += "enter"
+//                 break;
+//             case 'i':
+//                 encriptedMessage += "imes"
+//                 break;
+//             case 'a':
+//                 encriptedMessage += "ai"
+//                 break;
+//             case 'o':
+//                 encriptedMessage += "ober"
+//                 break;
+//             case 'u':
+//                 encriptedMessage += "ufat"
+//                 break;
+        
+//             default:
+//                 encriptedMessage += inputMessage.value[i]
+//         }
+//     }
+
+//     //Mostrar el mensaje encriptado en la página
+//     addCopyButton(encriptedMessage)
+
+//     inputMessage.value = ""
+
+//     inputEmpty()
+    
+// };
+
+// function addCopyButton(text) {
+
+//     //resetear html
+//     containerAside.innerHTML = ""
+
+//     //crear boton copiar
+//     const DIV = document.createElement('div')
+//     DIV.innerHTML = `
+//         <p class="message">${text}</p>
+//         <button class="copy">Copiar</button>
+//     `
+//     DIV.classList.add('container-aside__button')
+
+//     containerAside.appendChild(DIV)
+// };
+
+// function searchButtonCopy(e) {
+    
+//     if( e.target.classList.contains("copy") ) {
+        
+//         let messageEncripted = document.querySelector('.message').textContent.trim()
+//         document.querySelector('.copy').textContent = "Copiado"
+
+//         let textArea = document.createElement('textarea')
+//         document.body.appendChild(textArea)
+//         textArea.textContent = messageEncripted
+
+//         textArea.select()
+//         document.execCommand('copy')
+//         textArea.remove()
+//     }
+// };
+
+// function decryptButton(e) {
+    
+//     e.preventDefault()
+    
+//     let encryptedMessage = inputMessage.value
+
+//     if ( inputMessage.value.trim() === "" || !regex.exec(inputMessage.value.trim())) {
+        
+//         let inputAlert = document.querySelector('#message')
+//         inputAlert.textContent = "No hay mensaje o no cumple con la referencia"
+//         inputAlert.style.color = '#ff0000'
+
+//         return inputAlert
+//     }
+
+//     encryptedMessage = encryptedMessage
+//     .replaceAll("enter", 'e')
+//     .replaceAll("imes", 'i')
+//     .replaceAll("ai", 'a')
+//     .replaceAll("ober", 'o')
+//     .replaceAll("ufat", 'u')
+
+//     addCopyButton(encryptedMessage)
+
+//     inputMessage.value.trim() = ""
+
+//     inputEmpty()
+// };

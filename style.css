@@ -138,9 +138,10 @@ body {
 }
 
 .form__icon {
-  width: 16px;
-  height: 16px;
+  color: var(--color-white);
+  font-size: 1.8rem;
 }
+
 .form__message {
   padding-left: 5px;
   font-size: 1.2rem;
