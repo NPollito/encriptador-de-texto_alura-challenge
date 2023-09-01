@@ -30,3 +30,8 @@
 .form__buttons input:last-child {
   margin-top: 0;
 }
+
+/* aside */
+.aside__container {
+  width: 400px;
+}

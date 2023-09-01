@@ -7,6 +7,8 @@ const btnDelete = document.querySelector('#delete')
 
 //evento
 inputMessage.addEventListener('input', validate)
+btnEncrypt.addEventListener('click', encryptText)
+btnDecrypt.addEventListener('click', decryptText)
 
 //funciones
 function validate(e) {
@@ -21,6 +23,7 @@ function validate(e) {
     if ( !validateMessage(e.target.value) ){
 
         showAlert("Solo aceptamos letras de la A hasta la Z", true)
+        showDeleteButton()
         return
     }
 
@@ -29,9 +32,9 @@ function validate(e) {
 
 }
 
-function showAlert(message, validate) {
+function showAlert(message, boolean) {
 
-    if ( validate ) {
+    if ( boolean ) {
         
         // actualizar el textarea
         document.querySelector('.form__icon').style.color = '#ca6565'
@@ -40,10 +43,7 @@ function showAlert(message, validate) {
         document.querySelector('.form__message').innerText = message
 
         // actualizar estado de los botones
-        btnEncrypt.style.opacity = '0.5'
-        btnEncrypt.disabled = true
-        btnDecrypt.style.opacity = '0.5'
-        btnDecrypt.disabled = true
+        statusButtons(0.5, true)
     } else {
 
         document.querySelector('.form__icon').style.color = '#ffffff'
@@ -51,12 +51,17 @@ function showAlert(message, validate) {
         inputMessage.style.borderColor = '#ffffff'
         document.querySelector('.form__message').innerText = message
 
-        btnEncrypt.style.opacity = '1'
-        btnEncrypt.disabled = false
-        btnDecrypt.style.opacity = '1'
-        btnDecrypt.disabled = false
+        statusButtons(1, false)
     }
 };
+
+function statusButtons(opacity, boolean) {
+
+    btnEncrypt.style.opacity = opacity
+    btnEncrypt.disabled = boolean
+    btnDecrypt.style.opacity = opacity
+    btnDecrypt.disabled = boolean
+} 
 
 function showDeleteButton() {
     
@@ -80,6 +85,122 @@ function validateMessage(message) {
     const result = regex.test(message)
     return result
 };
+
+// funciones para encriptar y desencriptar
+
+function encryptText(e) {
+    
+    e.preventDefault()
+
+    let message = ""
+
+    message = inputMessage.value
+    .replace(/e/g, "enter")
+    .replace(/i/g, "imes")
+    .replace(/a/g, "ai")
+    .replace(/o/g, "ober")
+    .replace(/u/g, "ufat")
+
+    //segunda opción
+    /*for (let i = 0; i < inputMessage.value.length; i++) {
+        
+        switch ( inputMessage.value[i] ) {
+
+            case 'e':
+                message += "enter"
+                break;
+            case 'i':
+                message += "imes"
+                break;
+            case 'a':
+                message += "ai"
+                break;
+            case 'o':
+                message += "ober"
+                break;
+            case 'u':
+                message += "ufat"
+                break;
+        
+            default:
+                message += inputMessage.value[i]
+        }
+    }*/
+
+    document.body.appendChild(alertHTML("Mensaje encriptado correctamente", message, "Copiar"))
+
+    inputMessage.value = ""
+}
+
+function alertHTML(title, message, nameButton) {
+    
+    //bloquear scroll
+    document.body.style.overflow = 'hidden'
+
+    // Crear alerta y inyectar en el dom
+    const alert = document.createElement('ASIDE')
+
+    alert.classList.add('aside')
+
+    alert.innerHTML = `
+        <section class="aside__container">
+            <i class="fa-solid fa-circle-check"></i>
+            <p class="aside__title">${title}</p>
+            <h3 class="aside__message">${message}</h3>
+            <button class="aside__button">${nameButton}</button>
+        </section>
+    `
+
+    alert.querySelector('.aside__button').addEventListener('click', (e) => {
+
+        e.preventDefault()
+
+        //copiar el mensage cifrado
+        if ( nameButton == "Copiar") {
+            
+            copyText(message)
+        }
+        
+        btnDelete.style.display = 'none'
+        
+        statusButtons(0.5, true)
+
+        //eliminar la alerta creada
+        alert.remove()
+        
+        document.body.style.overflow = 'auto'
+    })
+
+    return alert
+}
+
+function copyText(message) {
+    
+    const textArea = document.createElement('TEXTAREA');
+    textArea.textContent = message
+    document.body.append(textArea)
+    textArea.select()
+    document.execCommand('copy')
+    textArea.remove()
+};
+
+function decryptText(e) {
+
+    e.preventDefault()
+    
+    let message = ""
+
+    message = inputMessage.value
+    .replaceAll("enter", 'e')
+    .replaceAll("imes", 'i')
+    .replaceAll("ai", 'a')
+    .replaceAll("ober", 'o')
+    .replaceAll("ufat", 'u')
+
+    document.body.appendChild(alertHTML("El mensaje es:", message, "Aceptar"))
+
+    inputMessage.value = ""
+}
 
 // pageEvents()
 
