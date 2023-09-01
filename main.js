@@ -1,9 +1,10 @@
 //variables
 const inputMessage = document.querySelector('#write-data');
-const regex = /^[a-zñ ]*$/;  //expresión regular. solo acepta letras no mayúsculas
+const regex = /^[a-zñ ]*$/;  //expresión regular. solo acepta letras (no mayúsculas)
 const btnEncrypt = document.querySelector('#btn_encriptar');
 const btnDecrypt = document.querySelector('#btn_desencriptar')
 const btnDelete = document.querySelector('#delete')
+const tableBody = document.querySelector('.table__body')
 
 //evento
 inputMessage.addEventListener('input', validate)
@@ -87,12 +88,14 @@ function validateMessage(message) {
 };
 
 // funciones para encriptar y desencriptar
+let id = 1
 
 function encryptText(e) {
     
     e.preventDefault()
 
     let message = ""
+
 
     message = inputMessage.value
     .replace(/e/g, "enter")
@@ -127,62 +130,15 @@ function encryptText(e) {
         }
     }*/
 
+    // Inyectar el mensaje en el historial
+    tableBody.appendChild(recordHTML(id, message))
+    
     document.body.appendChild(alertHTML("Mensaje encriptado correctamente", message, "Copiar"))
 
+    id++
+    
     inputMessage.value = ""
 }
-
-function alertHTML(title, message, nameButton) {
-    
-    //bloquear scroll
-    document.body.style.overflow = 'hidden'
-
-    // Crear alerta y inyectar en el dom
-    const alert = document.createElement('ASIDE')
-
-    alert.classList.add('aside')
-
-    alert.innerHTML = `
-        <section class="aside__container">
-            <i class="fa-solid fa-circle-check"></i>
-            <p class="aside__title">${title}</p>
-            <h3 class="aside__message">${message}</h3>
-            <button class="aside__button">${nameButton}</button>
-        </section>
-    `
-
-    alert.querySelector('.aside__button').addEventListener('click', (e) => {
-
-        e.preventDefault()
-
-        //copiar el mensage cifrado
-        if ( nameButton == "Copiar") {
-            
-            copyText(message)
-        }
-        
-        btnDelete.style.display = 'none'
-        
-        statusButtons(0.5, true)
-
-        //eliminar la alerta creada
-        alert.remove()
-        
-        document.body.style.overflow = 'auto'
-    })
-
-    return alert
-}
-
-function copyText(message) {
-    
-    const textArea = document.createElement('TEXTAREA');
-    textArea.textContent = message
-    document.body.append(textArea)
-    textArea.select()
-    document.execCommand('copy')
-    textArea.remove()
-};
 
 function decryptText(e) {
 
@@ -202,159 +158,87 @@ function decryptText(e) {
     inputMessage.value = ""
 }
 
-// pageEvents()
 
-// function pageEvents() {
-
-//     inputMessage.addEventListener('keyup', alertMensaje)
-//     encrypt.addEventListener('click', encryptButton)
-//     containerAside.addEventListener('click', searchButtonCopy)
-//     decrypt.addEventListener('click', decryptButton)
-// };
-
-
-// //funciones
-
-// function alertMensaje() {
-
-//     if( regex.exec(inputMessage.value.trim()) ) {
-
-//         document.querySelector('.form_textarea').classList.remove('border-red')
-//         document.querySelector('#excellent').style = 'display: block'
-//         document.querySelector('#message').style.color = '#0a3871'
-//         document.querySelector('#mistake').style = 'display: none'
-        
-//         inputEmpty()    //quitar el check de excellent
-        
-//     } else {
-        
-//         document.querySelector('.form_textarea').classList.add('border-red')
-//         document.querySelector('#mistake').style = 'display: block'
-//         document.querySelector('#message').style.color = '#ff0000'
-//         document.querySelector('#excellent').style = 'display: none'
-//     }
-// };
-
-// function inputEmpty() {
-
-//     if( inputMessage.value.trim() == "" ) {
-
-//         document.querySelector('#excellent').style = 'display: none'
-//         document.querySelector('#message')
-//         .textContent = "Solo letras minúsculas y sin acentos"
-//     }
-// }
-
-// function encryptButton(e) {
-
-//     let encriptedMessage = ""
-
-//     e.preventDefault()
-
-//     //Si no cumple con el formulario
-//     if ( inputMessage.value.trim() === "" || !regex.exec(inputMessage.value.trim())) {
-        
-//         let inputAlert = document.querySelector('#message')
-//         inputAlert.textContent = "Escribe solo texto para poder encriptar el mensaje"
-//         inputAlert.style.color = '#ff0000'
-
-//         return inputAlert
-//     }
-
-
-//     //encriptar textos
-//     for ( let i = 0; i < inputMessage.value.length; i++ ) {
-
-//         switch ( inputMessage.value[i] ) {
-
-//             case 'e':
-//                 encriptedMessage += "enter"
-//                 break;
-//             case 'i':
-//                 encriptedMessage += "imes"
-//                 break;
-//             case 'a':
-//                 encriptedMessage += "ai"
-//                 break;
-//             case 'o':
-//                 encriptedMessage += "ober"
-//                 break;
-//             case 'u':
-//                 encriptedMessage += "ufat"
-//                 break;
-        
-//             default:
-//                 encriptedMessage += inputMessage.value[i]
-//         }
-//     }
-
-//     //Mostrar el mensaje encriptado en la página
-//     addCopyButton(encriptedMessage)
-
-//     inputMessage.value = ""
-
-//     inputEmpty()
+function alertHTML(title, message, nameButton) {
     
-// };
+    //bloquear scroll
+    document.body.style.overflow = 'hidden'
 
-// function addCopyButton(text) {
+    // Crear alerta y inyectar en el dom
+    const alert = document.createElement('ASIDE')
 
-//     //resetear html
-//     containerAside.innerHTML = ""
+    alert.classList.add('aside')
 
-//     //crear boton copiar
-//     const DIV = document.createElement('div')
-//     DIV.innerHTML = `
-//         <p class="message">${text}</p>
-//         <button class="copy">Copiar</button>
-//     `
-//     DIV.classList.add('container-aside__button')
+    alert.innerHTML = `
+        <section class="aside__container">
+            <i class="fa-solid fa-circle-check"></i>
+            <p class="aside__title">${title}</p>
+            <h3 class="aside__message">${message}</h3>
+            <button class="aside__button">${nameButton}</button>
+            <span class="close" title="Cerrar"><i class="fa-solid fa-xmark"></i></span>
+        </section>
+    `
 
-//     containerAside.appendChild(DIV)
-// };
+    alert.querySelector('.aside__button').addEventListener('click', (e) => {
 
-// function searchButtonCopy(e) {
-    
-//     if( e.target.classList.contains("copy") ) {
+        e.preventDefault()
+
+        //copiar el mensage cifrado
+        if ( nameButton == "Copiar") {
+            
+            copyText(message)
+        }
+
+        //eliminar la alerta creada
+        alert.remove()
+
+        document.body.style.overflow = 'auto'
         
-//         let messageEncripted = document.querySelector('.message').textContent.trim()
-//         document.querySelector('.copy').textContent = "Copiado"
+    })
 
-//         let textArea = document.createElement('textarea')
-//         document.body.appendChild(textArea)
-//         textArea.textContent = messageEncripted
+    //cerrar la ventana de alerta
+    alert.querySelector('.close').addEventListener('click', () => {
 
-//         textArea.select()
-//         document.execCommand('copy')
-//         textArea.remove()
-//     }
-// };
+        alert.remove()
 
-// function decryptButton(e) {
+        document.body.style.overflow = 'auto'
+    })
+
+
+    btnDelete.style.display = 'none'
+    statusButtons(0.5, true)
+
+    return alert
+}
+
+function copyText(message) {
     
-//     e.preventDefault()
+    const textArea = document.createElement('TEXTAREA');
+    textArea.textContent = message
+    document.body.append(textArea)
+    textArea.select()
+    document.execCommand('copy')
+    textArea.remove()
+};
+
+// tab historial
+
+function recordHTML(id, message) {
+
+    const tr = document.createElement('TR')
     
-//     let encryptedMessage = inputMessage.value
+    tr.innerHTML = `
+        <td>${id}</td>
+        <td>${message}</td>
+        <td><i class="fa-regular fa-clone" title="Copiar"></i></td>
+        <td><i class="fa-solid fa-trash" title="Borrar"></i></td>
+    `
 
-//     if ( inputMessage.value.trim() === "" || !regex.exec(inputMessage.value.trim())) {
-        
-//         let inputAlert = document.querySelector('#message')
-//         inputAlert.textContent = "No hay mensaje o no cumple con la referencia"
-//         inputAlert.style.color = '#ff0000'
+    //copiar mensaje
+    tr.querySelector('.fa-clone').addEventListener('click', () => copyText(message))
 
-//         return inputAlert
-//     }
-
-//     encryptedMessage = encryptedMessage
-//     .replaceAll("enter", 'e')
-//     .replaceAll("imes", 'i')
-//     .replaceAll("ai", 'a')
-//     .replaceAll("ober", 'o')
-//     .replaceAll("ufat", 'u')
-
-//     addCopyButton(encryptedMessage)
-
-//     inputMessage.value.trim() = ""
-
-//     inputEmpty()
-// };
+    //eliminar mensaje
+    tr.querySelector('.fa-trash').addEventListener('click', () => tr.remove())
+    
+    return tr
+}

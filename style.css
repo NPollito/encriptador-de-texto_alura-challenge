@@ -233,12 +233,6 @@ body {
   justify-content: center;
 }
 
-.credits__title {
-  font-size: 2rem;
-  line-height: 30px;
-  letter-spacing: 2px;
-}
-
 .credits__github {
   margin-top: 20px;
   font-size: 9rem;
@@ -246,7 +240,7 @@ body {
 }
 
 .credits__name {
-  margin-top: 5px;
+  margin-top: 10px;
   font-size: 1.5rem;
 }
 
@@ -285,6 +279,7 @@ body {
 }
 
 .aside__container {
+  position: relative;
   background-color: var(--color-white);
   width: 300px;
   padding: 10px;
@@ -293,7 +288,7 @@ body {
   box-shadow: 0 0 30px 20px var(--color-bg2);
 }
 
-.aside__container i {
+.fa-circle-check {
   font-size: 5rem;
   color: rgb(2, 163, 2);
 }
@@ -306,7 +301,7 @@ body {
 .aside__message {
   width: 90%;
   margin: 15px auto 0;
-  padding: 5px;
+  padding: 10px 5px;
   font-size: 1.5rem;
   outline: 2px solid rgb(2, 163, 2);
   border-radius: 8px;
@@ -325,4 +320,14 @@ body {
 .aside__button:hover {
   color: var(--color-black);
   background-color: var(--color-white);
+}
+
+.close {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  font-size: 1.8rem;
+}
+.close:hover {
+  color: #ff0000;
 }
