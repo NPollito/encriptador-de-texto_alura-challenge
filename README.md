@@ -2,9 +2,9 @@
 
 ## Reto Finalizado
 
-> **Click [aquí](https://npollito.github.io/encriptador-de-texto_alura-challenge/ "hola") para ir a la página.**
+> **Click [aquí](https://npollito.github.io/encriptador-de-texto_alura-challenge/ "hola") para ir a la página v0.2.0**
 
-![reto](https://user-images.githubusercontent.com/80648862/235330142-782ba312-c303-46eb-a37c-c02987432fda.png)
+![reto](https://github.com/NPollito/encriptador-de-texto_alura-challenge/assets/80648862/889a94f5-51c3-4e4f-a130-cc6c1d8e607c)
 
 <div align="center">
     <img src="https://img.shields.io/badge/HTML-EC6231?logo=html5&logoColor=FFFFFF&style=for-the-badge" />
